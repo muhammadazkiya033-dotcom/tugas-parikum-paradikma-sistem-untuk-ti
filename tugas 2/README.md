@@ -1,123 +1,219 @@
-1. Persiapan
+# Tugas 2 — Komunikasi Inter-service dengan gRPC (Polyglot)
 
-Sebelum menjalankan program, pastikan beberapa aplikasi sudah terpasang di laptop:
+##  Deskripsi
 
-Visual Studio Code untuk menulis dan menjalankan kode.
-Go untuk menjalankan server.
-Python untuk menjalankan client Python.
-Node.js dan npm untuk menjalankan client Node.js.
-Protocol Buffers (protoc) untuk membuat kode gRPC.
+Praktikum ini membahas komunikasi antar-service menggunakan **gRPC** dengan pendekatan *polyglot*, yaitu penggunaan beberapa bahasa pemrograman dalam satu sistem.
 
-Buka folder proyek grpc-polyglot-lab di Visual Studio Code.
+Pada praktikum ini, Go digunakan sebagai server, sedangkan Python dan Node.js digunakan sebagai client. Kedua client tersebut dapat meminta data pengguna dari server yang sama melalui komunikasi gRPC.
 
-Struktur folder proyek:
+##  Tujuan Praktikum
 
-grpc-polyglot-lab/
-├── go-server/
-│   ├── pb/
-│   ├── go.mod
-│   ├── go.sum
-│   └── main.go
-├── node-client/
-│   ├── client.js
-│   └── package.json
-├── python-client/
-│   ├── client.py
-│   ├── user_pb2.py
-│   └── user_pb2_grpc.py
-├── .gitignore
-└── user.proto
-2. Menjalankan Go Server
+1. Memahami cara kerja komunikasi antar-service menggunakan gRPC.
+2. Membuat server gRPC menggunakan bahasa Go.
+3. Menghubungkan Python Client dengan Go Server.
+4. Menghubungkan Node.js Client dengan Go Server.
+5. Memahami penggunaan Protocol Buffers sebagai format definisi layanan.
 
-Go Server berfungsi sebagai penyedia layanan yang menerima permintaan dari client Python dan Node.js.
+##  Teknologi yang Digunakan
 
-Langkah-langkah:
+| Teknologi | Fungsi |
+|---|---|
+| Go | Menjalankan server gRPC |
+| Python | Membuat client untuk mengakses server |
+| Node.js | Membuat client menggunakan JavaScript |
+| gRPC | Menghubungkan client dengan server |
+| Protocol Buffers | Mendefinisikan pesan dan layanan komunikasi |
+| Visual Studio Code | Menulis dan menjalankan program |
 
-Buka Visual Studio Code.
-Buka terminal melalui menu Terminal → New Terminal.
-Masuk ke folder go-server dengan perintah:
-cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\go-server"
-Jalankan server menggunakan perintah:
-go run main.go
-Jika berhasil, terminal menampilkan:
-gRPC Server (Go) berjalan di port :50051...
+##  Struktur Folder
 
-Artinya, server sudah aktif dan siap menerima permintaan dari client.
+```text
+tugas 2/
+├── README.md
+└── grpc-polyglot-lab/
+    ├── go-server/
+    │   ├── pb/
+    │   │   ├── user.pb.go
+    │   │   └── user_grpc.pb.go
+    │   ├── go.mod
+    │   ├── go.sum
+    │   └── main.go
+    ├── node-client/
+    │   ├── client.js
+    │   └── package.json
+    ├── python-client/
+    │   ├── client.py
+    │   ├── user_pb2.py
+    │   └── user_pb2_grpc.py
+    ├── .gitignore
+    └── user.proto
+```
 
-Catatan: Biarkan terminal server tetap terbuka selama pengujian.
+##  Persiapan
 
-3. Menjalankan Python Client
+Sebelum menjalankan program, pastikan aplikasi berikut sudah terpasang:
+
+- [Go](https://go.dev/dl/)
+- [Python](https://www.python.org/downloads/)
+- [Node.js](https://nodejs.org/)
+- [Protocol Buffers](https://github.com/protocolbuffers/protobuf/releases)
+- Visual Studio Code
+
+Pastikan juga seluruh file proyek sudah tersedia sesuai struktur folder di atas.
+
+##  Langkah-Langkah Menjalankan Program
+
+### 1. Menjalankan Go Server
+
+Go Server bertugas menerima permintaan dari Python Client dan Node.js Client, kemudian mengirimkan data pengguna sesuai permintaan.
+
+**Langkah-langkah:**
+
+1. Buka folder `grpc-polyglot-lab` di Visual Studio Code.
+2. Buka terminal melalui menu **Terminal → New Terminal**.
+3. Masuk ke folder `go-server`:
+
+   ```powershell
+   cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\go-server"
+   ```
+
+4. Jalankan server:
+
+   ```powershell
+   go run main.go
+   ```
+
+5. Jika berhasil, terminal menampilkan:
+
+   ```text
+   gRPC Server (Go) berjalan di port :50051...
+   ```
+
+**Penting:** Biarkan terminal ini tetap terbuka selama pengujian karena server harus terus berjalan agar client dapat terhubung.
+
+### 2. Menjalankan Python Client
 
 Python Client digunakan untuk meminta data pengguna dari Go Server.
 
-Langkah-langkah:
+**Langkah-langkah:**
 
-Buka terminal baru di Visual Studio Code dengan memilih Terminal → New Terminal.
-Masuk ke folder python-client:
-cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\python-client"
-Jika library gRPC belum terpasang, jalankan:
-python -m pip install grpcio grpcio-tools
+1. Buka terminal baru di Visual Studio Code.
+2. Masuk ke folder `python-client`:
 
-Tunggu sampai proses instalasi selesai.
+   ```powershell
+   cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\python-client"
+   ```
 
-Jalankan Python Client:
-python client.py
-Jika berhasil, hasilnya akan seperti berikut:
-Mengirim request ke Go Server menggunakan Python...
-Respon dari Server -> Nama: Budi Santoso, Email: budi@universitas.ac.id
+3. Jika library gRPC belum terpasang, jalankan:
 
-Artinya, Python Client berhasil meminta data pengguna dari Go Server.
+   ```powershell
+   python -m pip install grpcio grpcio-tools
+   ```
 
-4. Menjalankan Node.js Client
+4. Jalankan client:
 
-Node.js Client juga digunakan untuk meminta data pengguna dari Go Server, tetapi menggunakan bahasa JavaScript.
+   ```powershell
+   python client.py
+   ```
 
-Langkah-langkah:
+5. Jika berhasil, hasilnya akan seperti berikut:
 
-Buka terminal baru di Visual Studio Code.
-Masuk ke folder node-client:
-cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\node-client"
-Jika library belum terpasang, jalankan:
-npm install @grpc/grpc-js @grpc/proto-loader
-Jalankan Node.js Client:
-node client.js
-Jika berhasil, hasilnya akan seperti berikut:
-Mengirim request ke Go Server menggunakan Node.js...
-Respon dari Server -> Nama: Budi Santoso, Email: budi@universitas.ac.id
+   ```text
+   Mengirim request ke Go Server menggunakan Python...
+   Respon dari Server -> Nama: Budi Santoso, Email: budi@universitas.ac.id
+   ```
 
-Artinya, Node.js Client berhasil berkomunikasi dengan Go Server melalui gRPC.
+Hasil tersebut menunjukkan bahwa Python Client berhasil mengirim permintaan dan menerima data dari Go Server.
 
-5. Memahami Cara Kerja Program
+### 3. Menjalankan Node.js Client
 
-Program ini menggunakan tiga bahasa pemrograman, yaitu Go, Python, dan JavaScript melalui Node.js.
+Node.js Client memiliki fungsi yang sama dengan Python Client, tetapi menggunakan JavaScript.
 
-Urutan kerjanya sebagai berikut:
+**Langkah-langkah:**
 
-Go Server dijalankan dan menunggu permintaan pada port 50051.
-Python Client atau Node.js Client mengirim permintaan untuk mendapatkan data pengguna dengan ID 1.
-Go Server menerima permintaan tersebut dan memeriksa ID pengguna.
-Jika ID pengguna adalah 1, server mengirimkan nama Budi Santoso dan email budi@universitas.ac.id.
-Client menerima dan menampilkan data yang dikirimkan oleh server.
+1. Buka terminal baru di Visual Studio Code.
+2. Masuk ke folder `node-client`:
 
-Komunikasi ini menggunakan gRPC dengan definisi layanan yang disimpan di file user.proto.
+   ```powershell
+   cd "D:\SEMESTER 5\PARADIKMA SISTEM UNTUK IT PAK REZA\project\tugas 2\grpc-polyglot-lab\node-client"
+   ```
 
-6. Menguji Data Pengguna
+3. Jika library belum terpasang, jalankan:
 
-Program juga dapat digunakan untuk menguji ID pengguna yang tidak ditemukan.
+   ```powershell
+   npm install @grpc/grpc-js @grpc/proto-loader
+   ```
 
-Jika client mengirim ID selain 1, server akan mengembalikan:
+4. Jalankan client:
 
+   ```powershell
+   node client.js
+   ```
+
+5. Jika berhasil, hasilnya akan seperti berikut:
+
+   ```text
+   Mengirim request ke Go Server menggunakan Node.js...
+   Respon dari Server -> Nama: Budi Santoso, Email: budi@universitas.ac.id
+   ```
+
+Hasil tersebut menunjukkan bahwa Node.js Client berhasil berkomunikasi dengan Go Server.
+
+##  Cara Kerja Program
+
+Alur komunikasi dalam praktikum ini adalah sebagai berikut:
+
+1. Go Server dijalankan dan menunggu permintaan pada port `50051`.
+2. Python Client atau Node.js Client mengirim permintaan data pengguna dengan ID `1`.
+3. Permintaan dikirim melalui gRPC berdasarkan definisi layanan di `user.proto`.
+4. Go Server memeriksa ID pengguna yang diterima.
+5. Jika ID pengguna adalah `1`, server mengirimkan nama dan email pengguna.
+6. Client menerima dan menampilkan data tersebut di terminal.
+
+##  Hasil Pengujian
+
+### Pengujian Python Client
+
+| Komponen | Hasil |
+|---|---|
+| Client | Python |
+| Server | Go |
+| User ID | 1 |
+| Nama | Budi Santoso |
+| Email | budi@universitas.ac.id |
+| Status | Berhasil |
+
+### Pengujian Node.js Client
+
+| Komponen | Hasil |
+|---|---|
+| Client | Node.js |
+| Server | Go |
+| User ID | 1 |
+| Nama | Budi Santoso |
+| Email | budi@universitas.ac.id |
+| Status | Berhasil |
+
+### Pengujian ID Pengguna yang Tidak Ditemukan
+
+Jika client mengirimkan ID selain `1`, server akan mengembalikan respons berikut:
+
+```text
 Nama: User Tidak Ditemukan
 Email: -
+```
 
-Hal ini terjadi karena server hanya menyediakan data untuk pengguna dengan ID 1.
+Respons tersebut muncul karena program hanya menyediakan data pengguna dengan ID `1`.
 
-7. Kesimpulan
+##  Kesimpulan
 
-Berdasarkan praktikum ini, komunikasi antar-service dapat dilakukan menggunakan gRPC meskipun server dan client menggunakan bahasa pemrograman yang berbeda.
+Berdasarkan praktikum yang dilakukan, Go Server dapat berkomunikasi dengan client yang menggunakan bahasa pemrograman berbeda melalui gRPC.
 
-Go digunakan sebagai server, sedangkan Python dan Node.js digunakan sebagai client. Ketiganya berkomunikasi menggunakan definisi layanan yang sama, yaitu user.proto.
+Python dan Node.js dapat mengirim permintaan ke server yang sama dan menerima respons berdasarkan ID pengguna. Hal ini menunjukkan bahwa gRPC dapat digunakan untuk membangun komunikasi antar-service dalam sistem yang menggunakan beberapa bahasa pemrograman.
 
-Dengan demikian, praktikum ini menunjukkan penerapan komunikasi antar-service menggunakan pendekatan polyglot.
+Pendekatan tersebut disebut *polyglot*, yaitu penggunaan beberapa bahasa pemrograman dalam satu sistem.
 
-Catatan penting: Jalankan Go Server terlebih dahulu, kemudian jalankan Python Client dan Node.js Client melalui terminal yang berbeda. Jika server berhenti, client tidak dapat memperoleh data darinya.
+---
+
+**Mata Kuliah:** Paradigma Sistem untuk TI  
+**Praktikum:** Komunikasi Inter-service dengan gRPC (Polyglot)
