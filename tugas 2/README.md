@@ -215,5 +215,3 @@ Pendekatan tersebut disebut *polyglot*, yaitu penggunaan beberapa bahasa pemrogr
 
 ---
 
-**Mata Kuliah:** Paradigma Sistem untuk TI  
-**Praktikum:** Komunikasi Inter-service dengan gRPC (Polyglot)
