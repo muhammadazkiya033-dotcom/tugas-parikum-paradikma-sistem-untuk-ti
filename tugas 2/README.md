@@ -27,27 +27,11 @@ Pada praktikum ini, Go digunakan sebagai server, sedangkan Python dan Node.js di
 
 ##  Struktur Folder
 
-```text
-tugas 2/
-├── README.md
-└── grpc-polyglot-lab/
-    ├── go-server/
-    │   ├── pb/
-    │   │   ├── user.pb.go
-    │   │   └── user_grpc.pb.go
-    │   ├── go.mod
-    │   ├── go.sum
-    │   └── main.go
-    ├── node-client/
-    │   ├── client.js
-    │   └── package.json
-    ├── python-client/
-    │   ├── client.py
-    │   ├── user_pb2.py
-    │   └── user_pb2_grpc.py
-    ├── .gitignore
-    └── user.proto
-```
+
+## Struktur Folder
+
+![Struktur Folder Proyek gRPC Polyglot](images/struktur-folder.png)
+
 
 ##  Persiapan
 

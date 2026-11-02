@@ -69,6 +69,7 @@ type UserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	NoHp          string                 `protobuf:"bytes,3,opt,name=no_hp,json=noHp,proto3" json:"no_hp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -117,6 +118,13 @@ func (x *UserResponse) GetEmail() string {
 	return ""
 }
 
+func (x *UserResponse) GetNoHp() string {
+	if x != nil {
+		return x.NoHp
+	}
+	return ""
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 const file_user_proto_rawDesc = "" +
@@ -124,10 +132,11 @@ const file_user_proto_rawDesc = "" +
 	"\n" +
 	"user.proto\x12\x04user\"&\n" +
 	"\vUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x05R\x06userId\"8\n" +
+	"\auser_id\x18\x01 \x01(\x05R\x06userId\"M\n" +
 	"\fUserResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email2F\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x13\n" +
+	"\x05no_hp\x18\x03 \x01(\tR\x04noHp2F\n" +
 	"\vUserService\x127\n" +
 	"\x0eGetUserProfile\x12\x11.user.UserRequest\x1a\x12.user.UserResponseB/Z-example.com/grpc-polyglot-lab/go-server/pb;pbb\x06proto3"
 

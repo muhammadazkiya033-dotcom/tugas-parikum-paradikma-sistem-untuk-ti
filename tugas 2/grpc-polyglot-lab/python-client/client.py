@@ -15,7 +15,8 @@ def run():
 
         print(
             f"Respon dari Server -> Nama: {response.name}, "
-            f"Email: {response.email}"
+            f"Email: {response.email}, "
+            f"No HP: {response.no_hp}"
         )
 
 

@@ -23,6 +23,7 @@ client.GetUserProfile({ user_id: 1 }, (err, response) => {
     }
 
     console.log(
-        `Respon dari Server -> Nama: ${response.name}, Email: ${response.email}`
+        `Respon dari Server -> Nama: ${response.name}, ` +
+        `Email: ${response.email}, No HP: ${response.no_hp}`
     );
 });
