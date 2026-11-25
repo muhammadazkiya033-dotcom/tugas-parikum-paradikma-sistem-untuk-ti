@@ -1,0 +1,28 @@
+services:
+  grpc-server:
+    image: muhammadazkiya/grpc-server:latest
+    container_name: grpc-server
+    ports:
+      - "50051:50051"
+    networks:
+      - grpc-network
+
+  node-client:
+    image: muhammadazkiya/grpc-node-client:latest
+    container_name: grpc-node-client
+    depends_on:
+      - grpc-server
+    networks:
+      - grpc-network
+
+  python-client:
+    image: muhammadazkiya/grpc-python-client:latest
+    container_name: grpc-python-client
+    depends_on:
+      - grpc-server
+    networks:
+      - grpc-network
+
+networks:
+  grpc-network:
+    driver: bridge
